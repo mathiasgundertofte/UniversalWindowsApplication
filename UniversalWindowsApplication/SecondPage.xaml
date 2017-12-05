@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="UWP.SecondPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock HorizontalAlignment="Left" Margin="56,12,0,0" TextWrapping="Wrap" Text="Submissions" VerticalAlignment="Top" Width="263" Height="80" FontSize="36" TextAlignment="Center"/>
+        <ListView x:Name="listView_userdata" HorizontalAlignment="Left" Height="513" Margin="424,92,0,0" VerticalAlignment="Top" Width="424"/>
+        <Button Content="Go Back" HorizontalAlignment="Left" Margin="56,625,0,0" VerticalAlignment="Top" Width="263" Click="Button_Click"/>
+        <ListView x:Name="listView_submissions" HorizontalAlignment="Left" Height="513" Margin="56,92,0,0" VerticalAlignment="Top" Width="263" SelectionChanged="listView_submissions_itemclicked" BorderThickness="0"/>
+
+    </Grid>
+</Page>
+
