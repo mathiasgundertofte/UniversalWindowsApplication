@@ -50,13 +50,9 @@ namespace UWP
 
         private void LoadUserdataFromXML()
         {
-             
-            userdataList = data.DeserialiseListFromXML(userdataList, "data");
 
-            //foreach(UserData data in data.DeserialiseListFromXML(userdataList, "data"))
-            //{
-            //    userdataList.Add(data);
-            //}
+            //userdataList = data.DeserialiseListFromXML(userdataList, "data");
+            userdataList = data.ReadUserDataFromXML("data");
         }
 
         //Adds the userdata of the selected submission to the list view

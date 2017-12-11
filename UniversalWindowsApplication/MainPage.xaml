@@ -13,9 +13,9 @@
         <FlyoutBase.AttachedFlyout>
             <DatePickerFlyout/>
         </FlyoutBase.AttachedFlyout>
-        <Button x:Name="enterSubmissionButton" Content="Enter Submission" HorizontalAlignment="Left" Margin="909,507,0,0" VerticalAlignment="Top" Height="48" Width="321" Click="submission_button_Click"/>
+        <Button x:Name="enterSubmissionButton" Content="Enter Submission" HorizontalAlignment="Left" Margin="909,507,0,0" VerticalAlignment="Top" Height="48" Width="321" Click="Submission_Button_Click"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="41,59,0,0" TextWrapping="Wrap" Text="Generated Keys" VerticalAlignment="Top" Width="334" FontSize="36" TextAlignment="Center"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="502" Margin="40,123,0,0" VerticalAlignment="Top" Width="336" BorderThickness="1" SelectionChanged="listView_SelectionChanged"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="502" Margin="40,123,0,0" VerticalAlignment="Top" Width="336" BorderThickness="1" SelectionChanged="ListView_SelectionChanged"/>
         <TextBox x:Name="firstNameTextBox" HorizontalAlignment="Left" Margin="909,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="321" PlaceholderText="First name"/>
         <TextBox x:Name="lastNameTextBox" HorizontalAlignment="Left" Margin="909,187,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="321" PlaceholderText="Last name"/>
         <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Margin="909,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="321" PlaceholderText="E-mail"/>
@@ -27,9 +27,9 @@
             <LineBreak/>
             <Run/>
         </TextBlock>
-        <Button x:Name="viewSubmissionsButton" Content="View Submissions" HorizontalAlignment="Left" Margin="909,576,0,0" VerticalAlignment="Top" Height="48" Width="321" Click="view_submission_button_Click"/>
-        <Button x:Name="generate_keys_button" Content="Generate Keys" HorizontalAlignment="Left" Margin="41,638,0,0" VerticalAlignment="Top" Height="48" Width="334" Click="Generate_keys_button_Click"/>
-        <Button x:Name="load_keys_button" Content="Load Keys" HorizontalAlignment="Left" Margin="41,706,0,0" VerticalAlignment="Top" Height="48" Width="334" Click="Load_keys_button_Click"/>
+        <Button x:Name="viewSubmissionsButton" Content="View Submissions" HorizontalAlignment="Left" Margin="909,576,0,0" VerticalAlignment="Top" Height="48" Width="321" Click="View_Submission_Button_Click"/>
+        <Button x:Name="generate_keys_button" Content="Generate Keys" HorizontalAlignment="Left" Margin="41,638,0,0" VerticalAlignment="Top" Height="48" Width="334" Click="Generate_Keys_Button_Click"/>
+        <Button x:Name="load_keys_button" Content="Load Keys" HorizontalAlignment="Left" Margin="41,706,0,0" VerticalAlignment="Top" Height="48" Width="334" Click="Load_Keys_Button_Click"/>
         <Popup>
             <Canvas Height="100" Width="100"/>
         </Popup>
@@ -50,7 +50,7 @@
                 </StackPanel>
             </StackPanel>
         </ContentDialog>
-        <Button x:Name="adminButton" Content="Create Admin Profile" HorizontalAlignment="Left" Margin="909,656,0,0" VerticalAlignment="Top" Height="48" Width="321" Click="AdminButton_Click"/>
+        <Button x:Name="adminButton" Content="Create Admin Profile" HorizontalAlignment="Left" Margin="909,656,0,0" VerticalAlignment="Top" Height="48" Width="321" Click="CreateAdminProfile_Button_Click"/>
         <ContentDialog x:Name="Admin_Dialog"
             VerticalAlignment="Stretch"
             Title="Create Admin Profile"
@@ -67,7 +67,6 @@
                 </StackPanel>
             </StackPanel>
         </ContentDialog>
-        <Button x:Name="testButton" Content="Test" HorizontalAlignment="Left" Margin="628,706,0,0" VerticalAlignment="Top" Width="100" Click="testButton_Click"/>
 
     </Grid>
 </Page>

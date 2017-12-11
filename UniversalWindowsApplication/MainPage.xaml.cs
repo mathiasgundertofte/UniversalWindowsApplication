@@ -15,10 +15,10 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWP
 {
-    
+
     public sealed partial class MainPage : Page
     {
-        private string username, password;
+        private string enteredUsername, enteredPassword;
         private bool loginSuccesfully;
         private int index;
         private Popup popup;
@@ -27,7 +27,7 @@ namespace UWP
         private UserData userdata;
         private DataPersistance data;
         private List<UserData> userdataList;
-        private List<String> keysList;
+        private List<String> availableKeysList, usedKeysList;
         private List<Admin> adminList;
 
         public MainPage()
@@ -47,28 +47,43 @@ namespace UWP
             data = new DataPersistance();
             validate = new ValidateUserData();
             adminList = new List<Admin>();
+            usedKeysList = new List<String>();
             popup = new Popup();
             loginSuccesfully = false;
         }
-        
+
         //Serializes the userdata list to an xml document
         private void SaveUserdataToXML(UserData data)
         {
             userdataList.Add(data);
-            this.data.SerializeList(userdataList, "data");    
+            this.data.SerializeList(userdataList, "data");
         }
 
 
         //Creates a new Userdata object when button is clicked
-        private void submission_button_Click(object sender, RoutedEventArgs e)
+        private void Submission_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (validate.CheckIfValidUserdata(keysList, firstNameTextBox, lastNameTextBox, emailTextBox, phoneTextBox, 
-                datePicker, serialNumberTextBox, serial))
+
+            //Checks if data entered is correct
+            if (validate.CheckIfValidUserdata(availableKeysList, usedKeysList, firstNameTextBox, lastNameTextBox, 
+                emailTextBox, phoneTextBox, datePicker, serialNumberTextBox, serial))
             {
-                userdata = new UserData(firstNameTextBox.Text, lastNameTextBox.Text, emailTextBox.Text, 
+                userdata = new UserData(firstNameTextBox.Text, lastNameTextBox.Text, emailTextBox.Text,
                                         phoneTextBox.Text, datePicker.Date.ToString(), serialNumberTextBox.Text);
+
+                //Adds used key to keep track if available keys
+                usedKeysList.Add(userdata.SerialNumber);
+                
+
+                //Prints a success message
                 popup.PrintSuccessfulUserdataMessage(userdata);
-                SaveUserdataToXML(userdata);
+
+                //SaveUserdataToXML(userdata);
+                data.WriteUserdataToXML("data", typeof(UserData), userdata, userdata.FirstName, userdata.LastName,
+                userdata.Email, userdata.Phone, userdata.Birthday, userdata.SerialNumber);
+
+
+
                 ClearTextBoxes();
                 //RemoveSerialKey();
             }
@@ -76,14 +91,14 @@ namespace UWP
 
         private void DeserializeKeys()
         {
-            keysList = data.DeserialiseListFromXML(keysList, "keys");
+            availableKeysList = data.DeserialiseListFromXML(availableKeysList, "keys");
         }
 
         private void SaveSerialKeysToXML()
         {
-            keysList = new List<String>();
-            serial.GenerateMultipleKeys(keysList, 100);
-            data.SerializeList(keysList, "keys");
+            availableKeysList = new List<String>();
+            serial.GenerateMultipleKeys(availableKeysList, 100);
+            data.SerializeList(availableKeysList, "keys");
         }
 
         //Adds all the serial keys to the listview
@@ -96,28 +111,27 @@ namespace UWP
 
             try
             {
-                foreach (String key in keysList)
+                foreach (String key in availableKeysList)
                 {
                     listView.Items.Add(key);
                 }
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 popup.DisplayMessage("No keys found. Please Generate keys.");
             }
-            
+
         }
 
         //When a key is selected in the listview it is inserted into the serial number textbox
-        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             index = listView.SelectedIndex;
-            
-            serialNumberTextBox.Text = keysList.ElementAt(index);
+            serialNumberTextBox.Text = availableKeysList.ElementAt(index);
         }
 
-        
+
         private void SwitchViewToSecondPage()
         {
             Frame.Navigate(typeof(SecondPage));
@@ -125,36 +139,10 @@ namespace UWP
 
 
         //Changes the view to Second Page
-        private void view_submission_button_Click(object sender, RoutedEventArgs e)
+        private void View_Submission_Button_Click(object sender, RoutedEventArgs e)
         {
             popup.ShowPopUp(loginDialog);
-            //loginDialog.PrimaryButtonClick += LoginDialog_PrimaryButtonClick;
-                
-            
         }
-
-        //When the popup button "Login" is pressed
-        //private void LoginDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        //{
-        //    adminList = data.DeserialiseListFromXML(adminList, "admin");
-
-        //    foreach (Admin adm in adminList)
-        //    {
-
-        //        if (adm.Username.Equals(AdminUsername) && adm.Password.Equals(AdminPassword))
-        //        {
-        //            loginSuccesfully = true;
-        //            popup.DisplayMessage("Login succesful!");
-        //        }
-        //    }
-
-        //    if (loginSuccesfully)
-        //    {
-        //        SwitchViewToSecondPage();
-        //    }
-        //}
-
-        
 
         private void ClearTextBoxes()
         {
@@ -165,63 +153,55 @@ namespace UWP
             serialNumberTextBox.Text = "";
         }
 
-        private void RemoveSerialKey()
-        {
-            keysList.ElementAt(index).Remove(index);
-            listView.Items.RemoveAt(index);
-        }
-
-        private void Generate_keys_button_Click(object sender, RoutedEventArgs e)
+        private void Generate_Keys_Button_Click(object sender, RoutedEventArgs e)
         {
             SaveSerialKeysToXML();
             popup.DisplayMessage("100 keys very succesfully generated and stored in keys.xml \nClick Load Keys to add them to the list and select a key to add it to the submission");
-            
+
         }
 
-        private void Load_keys_button_Click(object sender, RoutedEventArgs e)
+        private void Load_Keys_Button_Click(object sender, RoutedEventArgs e)
         {
             DeserializeKeys();
             AddKeysToListView();
         }
 
-       
 
-        private void AdminButton_Click(object sender, RoutedEventArgs e)
+
+        private void CreateAdminProfile_Button_Click(object sender, RoutedEventArgs e)
         {
             popup.ShowPopUp(Admin_Dialog);
 
         }
 
-        private void testButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        //    adminList = data.DeserialiseListFromXML(adminList, "admin");
-
-        //    foreach(Admin adm in adminList) {
-                
-
-        //        if (adm.Username.Equals(AdminUsername) && adm.Password.Equals(AdminPassword))
-        //        {
-        //            loginSuccesfully = true;
-        //        }
-
-        //    }
-
-        //    textBlock1.Text = loginSuccesfully.ToString();
-        }
 
         private void Admin_Dialog_CreateButton_click(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            username = AdminUsername.Text;
-            password = AdminPassword.Text;
-           
-            adminList.Add(new Admin(username, password));
-            data.SerializeList(adminList, "admin");
+            enteredUsername = AdminUsername.Text;
+            enteredPassword = AdminPassword.Text;
+
+            if (String.IsNullOrEmpty(enteredUsername) || String.IsNullOrEmpty(enteredPassword))
+            {
+                popup.DisplayMessage("You need to enter a username and a password");
+            }
+
+            else
+            {
+                adminList.Add(new Admin(enteredUsername, enteredPassword));
+                data.SerializeList(adminList, "admin");
+            }
         }
+
+
 
         private void LoginButtonClicked(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             adminList = data.DeserialiseListFromXML(adminList, "admin");
+
+            if (adminList.Count == 0)
+            {
+                popup.DisplayMessage("You need to create an admin profile");
+            }
 
             foreach (Admin adm in adminList)
             {
@@ -232,10 +212,15 @@ namespace UWP
                     popup.DisplayMessage("Login succesful!");
                 }
 
+                else if (String.IsNullOrEmpty(Username.Text) || String.IsNullOrEmpty(Password.Text))
+                {
+                    popup.DisplayMessage("You need to enter a username and a password");
+                }
+
                 else
                 {
                     loginSuccesfully = false;
-                    popup.DisplayMessage("Wrong username or password");
+                    popup.DisplayMessage("Wrong username or password.\nYou can create an admin profile by clicking on 'Create Admin Profile'");
                 }
             }
 
@@ -246,3 +231,4 @@ namespace UWP
         }
     }
 }
+

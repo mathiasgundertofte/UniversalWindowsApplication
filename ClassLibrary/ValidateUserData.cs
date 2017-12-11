@@ -14,7 +14,7 @@ namespace ClassLibrary
         private Popup popup = new Popup();
 
         //Checks if the userdata has the correct data
-        public bool CheckIfValidUserdata(List<String> list, TextBox firstNameTextBox, TextBox lastNameTextBox, TextBox emailTextBox,
+        public bool CheckIfValidUserdata(List<String> availableKeysList, List<String> usedKeysList, TextBox firstNameTextBox, TextBox lastNameTextBox, TextBox emailTextBox,
             TextBox phoneTextBox, DatePicker datePicker, TextBox serialNumberTextBox, SerialKey serial)
         {
 
@@ -61,9 +61,15 @@ namespace ClassLibrary
                 return false;
             }
 
-            if (!list.Contains(serialNumberTextBox.Text))
+            if (!availableKeysList.Contains(serialNumberTextBox.Text))
             {
                 popup.DisplayMessage("The inserted key does not exist in the system. Check for spelling errors.");
+                return false;
+            }
+
+            if(usedKeysList.Contains(serialNumberTextBox.Text))
+            {
+                popup.DisplayMessage("The key you have entered has already been used.");
                 return false;
             }
 

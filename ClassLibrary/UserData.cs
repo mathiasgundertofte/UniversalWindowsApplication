@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace ClassLibrary
 {
-    [XmlType("userdata")]
+    
     public class UserData
     {
         private string firstName, lastName, email, phone, birthday, serialNumber;
@@ -18,7 +18,7 @@ namespace ClassLibrary
         {
 
         }
-
+        
         public UserData(string firstName, string lastName, string email, string phone, string birthday, string serialNumber)
         {
             this.firstName = firstName;
@@ -30,7 +30,6 @@ namespace ClassLibrary
         }
 
         //Getters & Setters
-
         [XmlElement("first_name")]
         public string FirstName { get => firstName; set => firstName = value; }
 

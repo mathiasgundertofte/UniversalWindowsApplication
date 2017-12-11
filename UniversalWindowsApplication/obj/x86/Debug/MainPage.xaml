@@ -42,15 +42,15 @@
             <StackPanel>
                 <StackPanel>
                     <TextBlock Text="Username" />
-                    <TextBox x:ConnectionId='21' x:Name="Username" ></TextBox>
+                    <TextBox x:ConnectionId='20' x:Name="Username" ></TextBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Password" />
-                    <TextBox x:ConnectionId='20' x:Name="Password" ></TextBox>
+                    <TextBox x:ConnectionId='19' x:Name="Password" ></TextBox>
                 </StackPanel>
             </StackPanel>
         </ContentDialog>
-        <Button x:ConnectionId='15' x:Name="adminButton" Content="Create Admin Profile" HorizontalAlignment="Left" Margin="909,656,0,0" VerticalAlignment="Top" Height="48" Width="321"                          />
+        <Button x:ConnectionId='15' x:Name="adminButton" Content="Create Admin Profile" HorizontalAlignment="Left" Margin="909,656,0,0" VerticalAlignment="Top" Height="48" Width="321"                                        />
         <ContentDialog x:ConnectionId='16' x:Name="Admin_Dialog"
             VerticalAlignment="Stretch"
             Title="Create Admin Profile"
@@ -59,15 +59,14 @@
             <StackPanel>
                 <StackPanel>
                     <TextBlock Text="Username" />
-                    <TextBox x:ConnectionId='19' x:Name="AdminUsername" />
+                    <TextBox x:ConnectionId='18' x:Name="AdminUsername" />
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Password" />
-                    <TextBox x:ConnectionId='18' x:Name="AdminPassword" />
+                    <TextBox x:ConnectionId='17' x:Name="AdminPassword" />
                 </StackPanel>
             </StackPanel>
         </ContentDialog>
-        <Button x:ConnectionId='17' x:Name="testButton" Content="Test" HorizontalAlignment="Left" Margin="628,706,0,0" VerticalAlignment="Top" Width="100"                         />
 
     </Grid>
 </Page>
