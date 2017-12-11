@@ -1,10 +1,11 @@
 # Mandatory Assigment 2 - UniversalWindowsApplication
 
-This project was created by: 
-Mathias Gundertofte 
+This project was created by:
+Mathias Gundertofte
 magun15@student.sdu.dk
 
 ## Installation
+
 Import the project into Visual Studio
 Run the program
 
@@ -23,4 +24,4 @@ All the data is stored as .xml files in the in Windows AppData.
 Example of the path to storage:
 ```
 C:\Users\mathi\AppData\Local\Packages\66670046-126b-4478-86a3-1dae6acaa998_7m8q23r05h88a\LocalState
-``
+
