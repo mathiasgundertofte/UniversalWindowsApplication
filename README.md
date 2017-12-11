@@ -1,12 +1,12 @@
 # Mandatory Assigment 2 - UniversalWindowsApplication
 
-This project was created by:
-Mathias Gundertofte
-magun15@student.sdu.dk
+This project was created by:  
+Mathias Gundertofte  
+magun15@student.sdu.dk  
 
 ## Installation
 
-Import the project into Visual Studio
+Import the project into Visual Studio  
 Run the program
 
 ## How to use it
