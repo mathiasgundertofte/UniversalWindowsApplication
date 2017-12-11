@@ -5,7 +5,7 @@ Mathias Gundertofte
 magun15@student.sdu.dk  
 
 ## Installation
-
+Clone project to your pc  
 Import the project into Visual Studio  
 Run the program
 
