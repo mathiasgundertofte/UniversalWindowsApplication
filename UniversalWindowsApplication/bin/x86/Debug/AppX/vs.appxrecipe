@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\Users\mathi\source\repos\UniversalWindowsApplication\UniversalWindowsApplication\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-12-11T22:03:26.359</Modified>
+      <Modified>2017-12-12T00:40:27.142</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\mathi\source\repos\UniversalWindowsApplication\UniversalWindowsApplication\bin\x86\Debug\UniversalWindowsApplication.exe">
       <PackagePath>entrypoint\UniversalWindowsApplication.exe</PackagePath>
-      <Modified>2017-12-11T22:03:26.086</Modified>
+      <Modified>2017-12-12T00:40:26.667</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\mathi\.nuget\packages\microsoft.csharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -497,7 +497,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\mathi\source\repos\UniversalWindowsApplication\ClassLibrary\bin\x86\Debug\ClassLibrary.dll">
       <PackagePath>ClassLibrary.dll</PackagePath>
-      <Modified>2017-12-11T22:03:24.658</Modified>
+      <Modified>2017-12-12T00:22:43.981</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\mathi\source\repos\UniversalWindowsApplication\UniversalWindowsApplication\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
@@ -548,11 +548,11 @@
     <AppxPackagedFile Include="C:\Users\mathi\source\repos\UniversalWindowsApplication\UniversalWindowsApplication\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-12-11T22:00:33.009</Modified>
+      <Modified>2017-12-12T00:37:54.254</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\mathi\source\repos\UniversalWindowsApplication\UniversalWindowsApplication\bin\x86\Debug\Core\UniversalWindowsApplication.exe">
       <PackagePath>UniversalWindowsApplication.exe</PackagePath>
-      <Modified>2017-12-11T22:03:26.355</Modified>
+      <Modified>2017-12-12T00:40:27.139</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

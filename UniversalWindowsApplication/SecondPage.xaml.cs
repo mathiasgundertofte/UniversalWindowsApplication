@@ -26,6 +26,7 @@ namespace UWP
         private List<UserData> userdataList;
         private List<Submission> submissionList;
         private DataPersistance data;
+        private Random random;
 
         public SecondPage()
         {
@@ -33,6 +34,7 @@ namespace UWP
             submissionList = new List<Submission>();
             userdataList = new List<UserData>();
             data = new DataPersistance();
+            random = new Random();
             LoadUserdataFromXML();
             AddSubmissionsToList();
             AddSubmissionsToListView();
@@ -48,27 +50,31 @@ namespace UWP
             }
         }
 
+        //Draws a winner from the submission
+        private void DrawWinner()
+        {
+            int winnerIndex = random.Next(0, userdataList.Count);
+            
+            FillListViewWithUserData(listView_Winner, winnerIndex);
+        }
+
         private void LoadUserdataFromXML()
         {
-
-            //userdataList = data.DeserialiseListFromXML(userdataList, "data");
             userdataList = data.ReadUserDataFromXML("data");
         }
 
         //Adds the userdata of the selected submission to the list view
-        private void FillUserDataListView()
+        private void FillListViewWithUserData(ListView listview, int index)
         {
-            int index = listView_submissions.SelectedIndex;
-
             if (userdataList.Count > 0)
             {
-                listView_userdata.Items.Clear();
-                listView_userdata.Items.Add("First Name: " + userdataList.ElementAt(index).FirstName);
-                listView_userdata.Items.Add("Last Name: " + userdataList.ElementAt(index).LastName);
-                listView_userdata.Items.Add("Phone number: " + userdataList.ElementAt(index).Phone);
-                listView_userdata.Items.Add("E-mail: " + userdataList.ElementAt(index).Email);
-                listView_userdata.Items.Add("Birthday: " + userdataList.ElementAt(index).Birthday);
-                listView_userdata.Items.Add("Unique key: " + userdataList.ElementAt(index).SerialNumber);
+                listview.Items.Clear();
+                listview.Items.Add("First Name: " + userdataList.ElementAt(index).FirstName);
+                listview.Items.Add("Last Name: " + userdataList.ElementAt(index).LastName);
+                listview.Items.Add("Phone number: " + userdataList.ElementAt(index).Phone);
+                listview.Items.Add("E-mail: " + userdataList.ElementAt(index).Email);
+                listview.Items.Add("Birthday: " + userdataList.ElementAt(index).Birthday);
+                listview.Items.Add("Unique key: " + userdataList.ElementAt(index).SerialNumber);
             }
         }
 
@@ -79,7 +85,7 @@ namespace UWP
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ReturnToMainPage_Button(object sender, RoutedEventArgs e)
         {
             SwitchViewToMainPage();
         }
@@ -96,8 +102,13 @@ namespace UWP
         //Adds the userdata to the listview when a submission is selected
         private void listView_submissions_itemclicked(object sender, SelectionChangedEventArgs e)
         {
-            
-            FillUserDataListView();
+            int index = listView_submissions.SelectedIndex;
+            FillListViewWithUserData(view, index);
+        }
+
+        private void DrawWinner_Button_Click(object sender, RoutedEventArgs e)
+        {
+            DrawWinner();
         }
     }
 }

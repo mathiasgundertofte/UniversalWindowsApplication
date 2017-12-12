@@ -8,12 +8,13 @@ using System.Xml.Serialization;
 
 namespace ClassLibrary
 {
-    
+    [XmlRoot("UserData")]
     public class UserData
     {
         private string firstName, lastName, email, phone, birthday, serialNumber;
 
         //Empty constructor is mandatory in order to Serialize the object
+        
         public UserData()
         {
 
@@ -28,6 +29,8 @@ namespace ClassLibrary
             this.birthday = birthday;
             this.serialNumber = serialNumber;
         }
+
+
 
         //Getters & Setters
         [XmlElement("first_name")]

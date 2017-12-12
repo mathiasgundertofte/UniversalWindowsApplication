@@ -10,11 +10,13 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock HorizontalAlignment="Left" Margin="56,12,0,0" TextWrapping="Wrap" Text="Submissions" VerticalAlignment="Top" Width="263" Height="80" FontSize="36" TextAlignment="Center"/>
-        <ListView x:ConnectionId='1' x:Name="listView_userdata" HorizontalAlignment="Left" Height="513" Margin="424,92,0,0" VerticalAlignment="Top" Width="424"/>
-        <Button x:ConnectionId='2' Content="Go Back" HorizontalAlignment="Left" Margin="56,625,0,0" VerticalAlignment="Top" Width="263"                     />
+        <ListView x:ConnectionId='1' x:Name="view" HorizontalAlignment="Left" Height="513" Margin="424,92,0,0" VerticalAlignment="Top" Width="424"/>
+        <Button x:ConnectionId='2' x:Name="BackButton" Content="Go Back" HorizontalAlignment="Left" Margin="56,625,0,0" VerticalAlignment="Top" Width="263"                                />
         <ListView x:ConnectionId='3' x:Name="listView_submissions" HorizontalAlignment="Left" Height="513" Margin="56,92,0,0" VerticalAlignment="Top" Width="263"                                                     BorderThickness="0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="1031,12,0,0" TextWrapping="Wrap" Text="Draw Winner" VerticalAlignment="Top" Width="263" Height="80" FontSize="36" TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Margin="1031,12,0,0" TextWrapping="Wrap" Text="Winner" VerticalAlignment="Top" Width="263" Height="80" FontSize="36" TextAlignment="Center"/>
         <TextBlock HorizontalAlignment="Left" Margin="502,12,0,0" TextWrapping="Wrap" Text="User data" VerticalAlignment="Top" Width="263" Height="80" FontSize="36" TextAlignment="Center"/>
+        <Button x:ConnectionId='4' x:Name="WinnerButton" Content="Draw Winner" HorizontalAlignment="Left" Margin="56,677,0,0" VerticalAlignment="Top" Width="263"                                />
+        <ListView x:ConnectionId='5' x:Name="listView_Winner" HorizontalAlignment="Left" Height="513" Margin="987,92,0,0" VerticalAlignment="Top" Width="424"/>
 
     </Grid>
 </Page>

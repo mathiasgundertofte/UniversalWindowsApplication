@@ -15,8 +15,6 @@ namespace ClassLibrary
 {
     public class DataPersistance
     {
-        //private List<UserData> userdata = new List<UserData>();
-
 
         //Serializes a list and saves it as an xml file
         public async void SerializeList<T>(List<T> list, string filename)
@@ -59,24 +57,8 @@ namespace ClassLibrary
             return list;
         }
 
-        public async void WriteObjecToXML(object obj, Type type, string filename)
-        {
-            StorageFolder localFolderPath = ApplicationData.Current.LocalFolder;
 
-            await Task.Run(() =>
-            {
-
-                using (var stream = new FileStream(localFolderPath.Path + @"\" + filename + ".xml", FileMode.Create))
-                {
-                    var xml = new XmlSerializer(type);
-                    xml.Serialize(stream, obj);
-
-                }
-            });
-        }
-
-
-
+        //returns an Admin object from the XML file
         public Admin GetAdminObjectFromXML(string filename)
         {
 
@@ -101,56 +83,16 @@ namespace ClassLibrary
         }
 
 
-        //Test
 
-        //public async void TestAsync(Object obj, Type type, string filename, string firstName, string lastName, string email, string phone, string birthday, string serialID)
-        //{
-        //    StorageFolder path = ApplicationData.Current.LocalFolder;
-        //    string fullpath = path.Path + @"\" + filename + ".xml";
-
-
-        //    //Check if file exists - create file if it does not.
-        //    if (!File.Exists(path.Path + @"\" + filename + ".xml"))
-        //    {
-        //        await Task.Run(() =>
-        //        {
-
-        //            using (var stream = new FileStream(path.Path + @"\" + filename + ".xml", FileMode.Create))
-        //            {
-        //                var doc = new XmlSerializer(type);
-        //                doc.Serialize(stream, obj);
-        //            }
-        //        });
-        //    }
-
-        //    else
-        //    {
-        //        XDocument xml = XDocument.Load(fullpath);
-        //        var newElement =
-        //        new XElement("first_name", firstName,
-        //        new XElement("last_name", lastName),
-        //        new XElement("email", email),
-        //        new XElement("phone", phone),
-        //        new XElement("birthday", birthday),
-        //        new XElement("serial_key", serialID));
-
-        //        xml.Element("userdata").Add(newElement);
-
-        //        using (var stream = new FileStream(fullpath, FileMode.Create))
-        //        {
-        //            xml.Save(stream);
-        //        }
-        //    }
-        //}
-
-        //USING LINQ
+        //Writes the UserData to .xml using XmlSerializer to create the file and LINQ to append to it.
         public async void WriteUserdataToXML(string filename, Type type, object obj, string firstName, string lastName, string email, string phone, string birthday, string serialID)
         {
 
             StorageFolder path = ApplicationData.Current.LocalFolder;
+            string fullpath = path.Path + @"\" + filename + ".xml";
 
             //Check if file exists - create file if it does not.
-            if (!File.Exists(path.Path + @"\" + filename + ".xml"))
+            if (!File.Exists(fullpath))
             {
 
                 await Task.Run(() =>
@@ -158,23 +100,24 @@ namespace ClassLibrary
 
                     using (var stream = new FileStream(path.Path + @"\" + filename + ".xml", FileMode.Create))
                     {
-                        var xml = new XmlSerializer(type);
+                        var xmlSerializer = new XmlSerializer(type);
 
                         //removes name spacing
                         XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
                         ns.Add("", "");
 
                         //serializes object
-                        xml.Serialize(stream, obj, ns);
+                        xmlSerializer.Serialize(stream, obj, ns);
                     }
                 });
             }
 
 
-            //If the file already exists - append data to the existing file
-            else
-            {
-                XElement xml = XElement.Load(path.Path + @"\" + filename + ".xml");
+            //If the file already exists - append data to the existing file 
+            //This will add the first object twice, but it will only be read out once as the first is not listed as "UserData"
+            //should probably be fixed
+            XElement xml = XElement.Load(path.Path + @"\" + filename + ".xml");
+            
 
                 xml.Add(
                     new XElement("UserData",
@@ -190,11 +133,10 @@ namespace ClassLibrary
                 {
                     xml.Save(stream);
                 }
-
-            }
         }
 
 
+        //Read the UserData in from xml file and store it as a list
         public List<UserData> ReadUserDataFromXML(string filename)
         {
             List<UserData> list = new List<UserData>();
@@ -205,9 +147,11 @@ namespace ClassLibrary
             try
             {
                 XElement xml = XElement.Load(fullpath);
+
                 list = (from data in xml.Elements("UserData")
                         select new UserData()
                         {
+
                             FirstName = (string)data.Element("first_name").Value,
                             LastName = (string)data.Element("last_name").Value,
                             Email = (string)data.Element("email").Value,
@@ -228,5 +172,24 @@ namespace ClassLibrary
         }
 
     }
+
+
+    //UNUSED - could prove helpful later.
+
+    //public async void WriteObjecToXML(object obj, Type type, string filename)
+    //{
+    //    StorageFolder localFolderPath = ApplicationData.Current.LocalFolder;
+
+    //    await Task.Run(() =>
+    //    {
+
+    //        using (var stream = new FileStream(localFolderPath.Path + @"\" + filename + ".xml", FileMode.Create))
+    //        {
+    //            var xml = new XmlSerializer(type);
+    //            xml.Serialize(stream, obj);
+
+    //        }
+    //    });
+    //}
 }
 
